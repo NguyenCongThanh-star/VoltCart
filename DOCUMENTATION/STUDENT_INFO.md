@@ -2,7 +2,7 @@
 
 - **Team name:** WEB_2627302_10
 - **Project name:** VoltCart – Smartphones & Laptops Store
-- **Source-code repository:** _(to be added)_
+- **Source-code repository:** https://github.com/NguyenCongThanh-star/VoltCart
 
 | Full name | Student ID | Main responsibility |
 |---|---|---|
