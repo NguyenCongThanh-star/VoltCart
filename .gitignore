@@ -1,0 +1,36 @@
+# ---- Laravel (CODE/) ----
+CODE/vendor/
+CODE/node_modules/
+CODE/public/build/
+CODE/public/hot
+CODE/public/storage
+CODE/storage/*.key
+CODE/storage/logs/*
+CODE/storage/framework/cache/*
+CODE/storage/framework/sessions/*
+CODE/storage/framework/views/*
+CODE/bootstrap/cache/*.php
+CODE/.phpunit.result.cache
+
+# Environment secrets (never commit)
+.env
+.env.*
+!.env.example
+
+# ---- LaTeX build files ----
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.xdv
+
+# ---- Editors / OS ----
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
