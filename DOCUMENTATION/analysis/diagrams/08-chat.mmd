@@ -1,0 +1,36 @@
+sequenceDiagram
+    actor M as Thành viên
+    participant B as Trình duyệt của thành viên
+    participant S as Hệ thống
+    participant D as Cơ sở dữ liệu
+    actor A as Quản trị viên
+
+    M->>B: Bấm nút chat
+    B->>S: Yêu cầu mở cuộc trò chuyện
+    alt Chưa đăng nhập
+        S-->>B: Mời đăng nhập
+    else Đã đăng nhập
+        S->>D: Tìm cuộc trò chuyện của thành viên, chưa có thì tạo mới
+        D-->>S: Cuộc trò chuyện và tin nhắn cũ
+        S-->>B: Hiện lịch sử tin nhắn
+    end
+
+    M->>B: Gõ tin nhắn và gửi
+    B->>S: Gửi tin nhắn bằng AJAX
+    S->>S: Kiểm tra: không rỗng, tối đa 1000 ký tự
+    S->>D: Lưu tin nhắn, đánh dấu chưa đọc
+    S-->>B: Hiện tin vừa gửi
+
+    A->>S: Mở hộp thư chat
+    S->>D: Lấy danh sách cuộc trò chuyện
+    D-->>S: Danh sách, cuộc có tin chưa đọc xếp trên
+    S-->>A: Hiện hộp thư
+    A->>S: Mở cuộc trò chuyện và trả lời
+    S->>D: Lưu câu trả lời, đánh dấu đã đọc
+
+    loop Vài giây một lần khi khung chat đang mở
+        B->>S: Có tin mới sau tin cuối cùng không?
+        S->>D: Lấy tin nhắn mới
+        D-->>S: Tin mới, nếu có
+        S-->>B: Hiện câu trả lời của cửa hàng
+    end

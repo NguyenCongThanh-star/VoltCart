@@ -1,0 +1,26 @@
+flowchart TD
+    start(["Admin mở trang quản lý sản phẩm"]) --> act{"Admin làm gì?"}
+
+    act -- "Thêm hoặc sửa" --> form["Nhập tên, danh mục, hãng, thông số, giá khách, giá thành viên, tồn kho, ảnh"]
+    form --> v1{"Đủ thông tin bắt buộc?"}
+    v1 -- "Không" --> e1["Hiện lỗi tại ô còn thiếu"]
+    e1 --> form
+    v1 -- "Có" --> v2{"Giá thành viên không lớn hơn giá khách?"}
+    v2 -- "Không" --> e2["Báo: giá thành viên phải nhỏ hơn hoặc bằng giá khách"]
+    e2 --> form
+    v2 -- "Có" --> v3{"Ảnh đúng định dạng và dung lượng?"}
+    v3 -- "Không" --> e3["Báo lỗi ảnh"]
+    e3 --> form
+    v3 -- "Có" --> save["Lưu sản phẩm và ảnh"]
+    save --> ok(["Báo thành công, quay về danh sách"])
+
+    act -- "Xóa" --> used{"Sản phẩm đã có trong đơn hàng nào chưa?"}
+    used -- "Có" --> block["Không cho xóa, gợi ý chuyển sang Ẩn"]
+    used -- "Chưa" --> confirm{"Admin xác nhận xóa?"}
+    confirm -- "Có" --> del["Xóa sản phẩm và ảnh"]
+    confirm -- "Không" --> start
+    del --> ok
+
+    act -- "Ẩn hoặc hiện" --> toggle["Đổi trạng thái hiện/ẩn"]
+    toggle --> note["Sản phẩm ẩn không hiện ở cửa hàng, đơn cũ vẫn giữ nguyên"]
+    note --> ok

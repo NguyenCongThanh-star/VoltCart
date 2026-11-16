@@ -1,0 +1,23 @@
+flowchart TD
+    start(["Khách mở trang cửa hàng"]) --> how{"Khách làm gì?"}
+    how -- "Gõ từ khóa vào ô tìm kiếm" --> kw["Tìm theo tên sản phẩm và tên hãng"]
+    how -- "Chọn một danh mục" --> cat["Lấy sản phẩm của danh mục"]
+
+    kw --> base["Chỉ lấy sản phẩm đang hiện"]
+    cat --> base
+
+    base --> filter{"Có chọn bộ lọc?"}
+    filter -- "Có" --> apply["Lọc theo hãng, khoảng giá, RAM"]
+    filter -- "Không" --> sort
+    apply --> sort["Sắp xếp: giá tăng, giá giảm hoặc mới nhất"]
+
+    sort --> price{"Đã đăng nhập?"}
+    price -- "Có" --> pm["Hiện giá thành viên"]
+    price -- "Không" --> pg["Hiện giá khách"]
+
+    pm --> found{"Có kết quả?"}
+    pg --> found
+    found -- "Có" --> list["Hiện số kết quả và danh sách có phân trang"]
+    found -- "Không" --> empty["Báo không tìm thấy, gợi ý xóa bộ lọc"]
+
+    list --> detail(["Khách bấm vào sản phẩm để xem chi tiết"])
