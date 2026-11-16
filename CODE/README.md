@@ -1,11 +1,8 @@
 # CODE
 
-The Laravel 11 application will be created in this folder (week 3–4).
+Laravel 11 application of VoltCart (PHP 8.2+, MySQL 8).
 
-Planned setup (requires PHP 8.2, Composer and MySQL, e.g. via Laragon):
-
-```bash
-composer create-project laravel/laravel .
-```
-
-All application source code, migrations and seeders stay inside this folder.
+- Installation and run instructions: [../DOCUMENTATION/SETUP.md](../DOCUMENTATION/SETUP.md)
+- Hand-written CSS and JavaScript live in `public/css` and `public/js` (no npm build step).
+- Blade templates: `resources/views`
+- Migrations and seeders: `database/`
