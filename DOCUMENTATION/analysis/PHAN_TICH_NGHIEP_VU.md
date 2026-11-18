@@ -142,17 +142,31 @@ Biến thể sản phẩm, trả góp, thu cũ đổi mới, cổng thanh toán 
 
 ## 4. Danh sách sơ đồ
 
-| # | Sơ đồ | File | Trả lời câu hỏi |
-|---|---|---|---|
-| 1 | Use case tổng quát | [01-use-case.mmd](diagrams/01-use-case.mmd) | Ai làm được gì? |
-| 2 | Tìm kiếm và lọc sản phẩm | [02-tim-kiem-loc.mmd](diagrams/02-tim-kiem-loc.mmd) | Khách tìm sản phẩm như thế nào? |
-| 3 | Giỏ hàng và mã giảm giá | [03-gio-hang-ma-giam-gia.mmd](diagrams/03-gio-hang-ma-giam-gia.mmd) | Giỏ hàng và mã giảm giá được kiểm tra ra sao? |
-| 4 | Đặt hàng | [04-dat-hang.mmd](diagrams/04-dat-hang.mmd) | Từ giỏ hàng đến đơn hàng gồm những bước nào? |
-| 5 | Vòng đời đơn hàng | [05-trang-thai-don-hang.mmd](diagrams/05-trang-thai-don-hang.mmd) | Đơn đi qua những trạng thái nào, kho thay đổi lúc nào? |
-| 6 | Admin xử lý đơn | [06-admin-xu-ly-don.mmd](diagrams/06-admin-xu-ly-don.mmd) | Admin làm gì với một đơn mới? |
-| 7 | Quản lý sản phẩm | [07-quan-ly-san-pham.mmd](diagrams/07-quan-ly-san-pham.mmd) | Thêm, sửa, xóa sản phẩm được kiểm tra thế nào? |
-| 8 | Chat | [08-chat.mmd](diagrams/08-chat.mmd) | Tin nhắn đi từ khách đến admin và ngược lại ra sao? |
-| 9 | ERD | [09-erd.mmd](diagrams/09-erd.mmd) | Dữ liệu được lưu trong những bảng nào? |
+Mọi sơ đồ được lưu dạng PDF, chữ trong sơ đồ bằng tiếng Anh. File nguồn (`.drawio`, `.puml`, `.mmd`) không đưa lên GitHub, Thành giữ trên máy để sửa.
+
+| Loại | Thư mục | Cho biết |
+|---|---|---|
+| Use case (UC) | [`diagrams/use-case/`](diagrams/use-case/) | Ai làm được gì |
+| Activity (AD) | [`diagrams/activity/`](diagrams/activity/) | Từng bước của một nghiệp vụ, chia làn Customer / System / Database / Admin |
+| Sequence (SQ) | [`diagrams/sequence/`](diagrams/sequence/) | Lớp nào gọi lớp nào trong code: View → Controller → Service → Model → Database |
+| State (STD) | [`diagrams/state/`](diagrams/state/) | Đơn hàng đi qua những trạng thái nào |
+| ERD | [`diagrams/erd/`](diagrams/erd/) | Dữ liệu được lưu trong những bảng nào |
+
+Use case tổng quát: [UC-overview.pdf](diagrams/use-case/UC-overview.pdf).
+
+| # | Nghiệp vụ | Activity | Sequence | Trả lời câu hỏi |
+|---|---|---|---|---|
+| 1 | Đăng nhập | [AD-01](diagrams/activity/AD-01-login.pdf) | [SQ-01](diagrams/sequence/SQ-01-login.pdf) | Ai vào được, tài khoản bị khóa thì sao? |
+| 2 | Tìm kiếm và lọc sản phẩm | [AD-02](diagrams/activity/AD-02-search-filter.pdf) | [SQ-02](diagrams/sequence/SQ-02-search-filter.pdf) | Khách tìm sản phẩm như thế nào? |
+| 3 | Giỏ hàng và mã giảm giá | [AD-03](diagrams/activity/AD-03-cart-coupon.pdf) | [SQ-03](diagrams/sequence/SQ-03-cart-coupon.pdf) | Giỏ hàng và mã giảm giá được kiểm tra ra sao? |
+| 4 | Đặt hàng | [AD-04](diagrams/activity/AD-04-checkout.pdf) | [SQ-04](diagrams/sequence/SQ-04-checkout.pdf) | Từ giỏ hàng đến đơn hàng gồm những bước nào? |
+| 5 | Admin xử lý đơn | [AD-05](diagrams/activity/AD-05-admin-order-processing.pdf) | [SQ-05](diagrams/sequence/SQ-05-admin-order-processing.pdf) | Admin đổi trạng thái đơn thế nào, kho cộng lại lúc nào? |
+| 6 | Quản lý sản phẩm | [AD-06](diagrams/activity/AD-06-product-management.pdf) | [SQ-06](diagrams/sequence/SQ-06-product-management.pdf) | Thêm, xóa sản phẩm được kiểm tra thế nào? |
+| 7 | Chat | [AD-07](diagrams/activity/AD-07-chat.pdf) | [SQ-07](diagrams/sequence/SQ-07-chat.pdf) | Tin nhắn đi từ khách đến admin và ngược lại ra sao? |
+
+Vòng đời đơn hàng: [STD-order-status.pdf](diagrams/state/STD-order-status.pdf). Cơ sở dữ liệu: [ERD-database.pdf](diagrams/erd/ERD-database.pdf).
+
+Tên lớp trong sơ đồ sequence (`Shop\ProductController`, `OrderService`, `Order (Model)`…) là tên sẽ dùng trong code, theo [CODE_MAP.md](../guides/CODE_MAP.md).
 
 ## 5. Điểm còn chờ quyết định
 
