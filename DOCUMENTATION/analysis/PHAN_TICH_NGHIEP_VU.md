@@ -99,6 +99,7 @@ Biến thể sản phẩm, trả góp, thu cũ đổi mới, cổng thanh toán 
 | R-08 | **Trừ kho** ngay khi tạo đơn thành công. |
 | R-09 | **Cộng lại kho** khi đơn chuyển sang Cancelled. |
 | R-10 | Tạo đơn, tạo các dòng sản phẩm và trừ kho xảy ra trong một giao dịch: hoặc thành công hết, hoặc không có gì thay đổi. |
+| R-31 | Giỏ hàng lưu trong bảng `carts` / `cart_items`. Giỏ của thành viên gắn với tài khoản, giỏ của khách vãng lai gắn với phiên trình duyệt. Khi khách đăng nhập, giỏ của khách được gộp vào giỏ của thành viên (cộng số lượng, không vượt tồn kho). |
 
 ### 3.3 Mã giảm giá và tổng tiền
 
@@ -168,7 +169,13 @@ Vòng đời đơn hàng: [STD-order-status.pdf](diagrams/state/STD-order-status
 
 Tên lớp trong sơ đồ sequence (`Shop\ProductController`, `OrderService`, `Order (Model)`…) là tên sẽ dùng trong code, theo [CODE_MAP.md](../guides/CODE_MAP.md).
 
-## 5. Điểm còn chờ quyết định
+## 5. Quyết định kỹ thuật đã chốt
 
-- Giỏ hàng lưu trong session (đơn giản, ERD đang vẽ theo hướng này) hay trong bảng `carts` / `cart_items`.
-- Định dạng mã đơn hàng, ví dụ `VC-YYYYMMDD-XXXX`.
+| Vấn đề | Quyết định |
+|---|---|
+| Giỏ hàng lưu ở đâu | Bảng `carts` và `cart_items` cho cả khách vãng lai và thành viên (R-31) |
+| Mã đơn hàng | `VC-YYYYMMDD-XXXX`, ví dụ `VC-20261125-0007`: ngày đặt + số thứ tự trong ngày |
+| Ảnh sản phẩm | Lưu trong `storage/app/public/products`, mở được qua `/storage/products/...` nhờ `php artisan storage:link` |
+| Dữ liệu trả về cho AJAX | Mọi API giỏ hàng và mã giảm giá trả JSON cùng một dạng (xem `TIMELINE.md` mục 6) |
+
+Còn chờ: giảng viên chấp thuận tính năng chat (hỏi ở buổi 04).
