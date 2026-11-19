@@ -67,7 +67,7 @@ A1 và A2 là hai dạng của actor cha "Khách hàng". Không có actor bên n
 
 | Mã | Tính năng | Quyết định |
 |---|---|---|
-| M-13 | Chat giữa thành viên và cửa hàng (AJAX, tự cập nhật vài giây một lần) | **Làm** sau Checkpoint 02 – Mẫn phụ trách; cần giảng viên chấp thuận |
+| M-13 | Chat giữa thành viên và cửa hàng (AJAX, tự cập nhật vài giây một lần) | **Làm** sau Checkpoint 02 – Mẫn phụ trách; giảng viên đã chấp thuận ở buổi 04 |
 | M-01 | Tra cứu đơn cho khách vãng lai bằng mã đơn + email | **Làm** |
 | M-02 | Khách tự hủy đơn khi còn Pending | Nếu còn thời gian |
 | M-03 | Báo cáo sản phẩm sắp hết hàng | Nếu còn thời gian |
@@ -180,7 +180,7 @@ Tên lớp trong sơ đồ sequence (`Shop\ProductController`, `OrderService`, `
 | Chuẩn hóa cơ sở dữ liệu | Mọi bảng đạt BCNF (xem mục 6) |
 | Xóa dữ liệu đã có trong đơn | Không xóa được sản phẩm, mã giảm giá hay tài khoản đã có trong đơn hàng: ẩn sản phẩm, tắt mã, khóa tài khoản |
 
-Còn chờ: giảng viên chấp thuận tính năng chat (hỏi ở buổi 04).
+Tính năng chat (M-13): giảng viên đã chấp thuận ở buổi 04.
 
 ## 6. Chuẩn hóa BCNF
 
