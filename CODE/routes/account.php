@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Account\LoginController;
+use App\Http\Controllers\Account\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +22,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('guest')->group(function () {
-    // register and login routes
+    Route::get('/register', [RegisterController::class, 'create'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store']);
+
+    Route::get('/login', [LoginController::class, 'create'])->name('login');
+    Route::post('/login', [LoginController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {
-    // logout, profile and order-history routes
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+
+    // profile and order-history routes
 });
