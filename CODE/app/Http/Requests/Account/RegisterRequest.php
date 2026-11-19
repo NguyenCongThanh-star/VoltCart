@@ -31,7 +31,8 @@ class RegisterRequest extends FormRequest
             // Vietnamese mobile number: 10 digits starting with 0. Optional.
             'phone' => ['nullable', 'regex:/^0[0-9]{9}$/'],
             // "confirmed" means password_confirmation must be the same.
-            'password' => ['required', 'confirmed', Password::min(8)],
+            // Password::defaults() = the site's password rules, see AppServiceProvider.
+            'password' => ['required', 'string', 'confirmed', Password::defaults()],
         ];
     }
 

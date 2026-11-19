@@ -31,7 +31,9 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            // No strength rules here: old accounts must still be able to log in.
+            // The length limit only stops absurdly long input from being hashed.
+            'password' => ['required', 'string', 'max:255'],
             'remember' => ['nullable', 'boolean'],
         ];
     }
