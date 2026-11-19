@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -57,6 +59,22 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed', // stored encrypted, never as plain text (R-22)
         ];
+    }
+
+    /**
+     * Orders placed while logged in (R-20, R-25).
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    /**
+     * A member has at most one cart (R-31).
+     */
+    public function cart(): HasOne
+    {
+        return $this->hasOne(Cart::class);
     }
 
     public function isAdmin(): bool

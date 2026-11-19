@@ -177,5 +177,37 @@ Tên lớp trong sơ đồ sequence (`Shop\ProductController`, `OrderService`, `
 | Mã đơn hàng | `VC-YYYYMMDD-XXXX`, ví dụ `VC-20261125-0007`: ngày đặt + số thứ tự trong ngày |
 | Ảnh sản phẩm | Lưu trong `storage/app/public/products`, mở được qua `/storage/products/...` nhờ `php artisan storage:link` |
 | Dữ liệu trả về cho AJAX | Mọi API giỏ hàng và mã giảm giá trả JSON cùng một dạng (xem `TIMELINE.md` mục 6) |
+| Chuẩn hóa cơ sở dữ liệu | Mọi bảng đạt BCNF (xem mục 6) |
+| Xóa dữ liệu đã có trong đơn | Không xóa được sản phẩm, mã giảm giá hay tài khoản đã có trong đơn hàng: ẩn sản phẩm, tắt mã, khóa tài khoản |
 
 Còn chờ: giảng viên chấp thuận tính năng chat (hỏi ở buổi 04).
+
+## 6. Chuẩn hóa BCNF
+
+Mỗi bảng chỉ có các phụ thuộc hàm mà vế trái là khóa ứng viên của bảng đó.
+
+**Không lưu cột tính ra được.** Các giá trị sau được tính trong Model, không có cột trong database:
+
+| Giá trị | Cách tính | Ở đâu |
+|---|---|---|
+| Thành tiền một dòng | `unit_price × quantity` | `OrderItem::lineTotal()` |
+| Tạm tính | Tổng thành tiền các dòng | `Order::subtotal()` |
+| Tổng tiền | Tạm tính − `discount` + `shipping_fee` (R-15) | `Order::total()` |
+
+**Cột chụp lại lúc đặt hàng không phải dư thừa.** `order_items.product_name`, `order_items.unit_price`, `orders.discount` và `orders.shipping_fee` ghi giá trị *tại thời điểm đặt*. Sau đó admin có thể đổi tên, giá, mã giảm giá hay phí giao, nên các cột này không suy ra được từ `product_id` hay `coupon_id` (R-04). Thông tin người nhận trong `orders` cũng vậy: khách nhập cho từng đơn, có thể khác hồ sơ tài khoản.
+
+**Khóa ứng viên:**
+
+| Bảng | Khóa ứng viên |
+|---|---|
+| `coupons` | `id`, `code` |
+| `orders` | `id`, `code` |
+| `order_items` | `id`, (`order_id`, `product_id`) |
+| `carts` | `id`, `user_id`, `session_id` |
+| `cart_items` | `id`, (`cart_id`, `product_id`) |
+
+**Ràng buộc CHECK trong MySQL:**
+- Một giỏ có đúng một chủ: `user_id` hoặc `session_id`.
+- Số lượng ≥ 1.
+- Không có mã thì `discount = 0`.
+- `status` và `payment_method` chỉ nhận các giá trị đã liệt kê.

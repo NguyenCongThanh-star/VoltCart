@@ -58,6 +58,14 @@ class Product extends Model
     }
 
     /**
+     * Order lines that contain this product. A product with order lines cannot be deleted.
+     */
+    public function orderItems(): HasMany
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    /**
      * Only products that customers may see.
      * Usage: Product::visible()->get()
      */
