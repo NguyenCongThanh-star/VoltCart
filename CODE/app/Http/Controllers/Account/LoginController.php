@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Account;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Account\LoginRequest;
+use App\Services\CartService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,11 +28,15 @@ class LoginController extends Controller
     }
 
     /** POST /login */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request, CartService $carts): RedirectResponse
     {
         $request->ensureIsNotRateLimited();
 
         $credentials = $request->only('email', 'password');
+
+        // R-31: the guest cart is found by the session id. Auth::attempt() gives the session
+        // a new id as soon as the login succeeds, so the guest's id must be read first.
+        $guestSessionId = $request->session()->getId();
 
         if (! Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->hitRateLimiter();
@@ -55,8 +60,8 @@ class LoginController extends Controller
 
         $request->clearRateLimiter();
 
-        // TODO week 5 (R-31): read the guest cart's session id HERE, before the
-        // session is regenerated, then call CartService::mergeGuestCart().
+        // R-31: move the guest cart into the member's cart.
+        $merged = $carts->mergeGuestCart($guestSessionId, Auth::user());
 
         // New session id after login, so an old stolen session id becomes useless.
         $request->session()->regenerate();
@@ -66,7 +71,11 @@ class LoginController extends Controller
         }
 
         // Back to the page the member wanted before being asked to log in, or the home page.
-        return redirect()->intended(route('home'));
+        $redirect = redirect()->intended(route('home'));
+
+        return $merged
+            ? $redirect->with('status', 'The products you added before logging in are now in your cart.')
+            : $redirect;
     }
 
     /** POST /logout */

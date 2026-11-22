@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Rules\NotCommonPassword;
+use App\Services\CartService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -22,6 +24,24 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->definePasswordRules();
+        $this->shareCartCount();
+    }
+
+    /**
+     * Gives every layout (resources/views/layouts/*) the variable $cartCount,
+     * the number shown on the cart icon in the header (CART_API.md, decision L).
+     * After an AJAX change, JavaScript updates the icon with cart.count instead.
+     */
+    private function shareCartCount(): void
+    {
+        View::composer('layouts.*', function ($view) {
+            $request = request();
+            $count = $request->hasSession()
+                ? app(CartService::class)->count($request->user(), $request->session()->getId())
+                : 0;
+
+            $view->with('cartCount', $count);
+        });
     }
 
     /**
