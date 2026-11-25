@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Minh họa laptop">
+  <rect width="320" height="220" rx="18" fill="#E8F5FA"/>
+  <rect x="67" y="37" width="186" height="124" rx="9" fill="#163B65"/>
+  <rect x="75" y="45" width="170" height="108" rx="4" fill="#FFFFFF"/>
+  <rect x="90" y="62" width="140" height="12" rx="4" fill="#D9EFF7"/>
+  <rect x="90" y="84" width="88" height="8" rx="4" fill="#2FAED0"/>
+  <rect x="90" y="100" width="124" height="8" rx="4" fill="#A9C8D8"/>
+  <path d="M45 166h230l-18 17H63z" fill="#6D91A6"/>
+  <rect x="133" y="166" width="54" height="5" rx="2" fill="#D9E7ED"/>
+</svg>
