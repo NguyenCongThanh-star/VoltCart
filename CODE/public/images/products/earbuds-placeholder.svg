@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Minh họa tai nghe không dây">
+  <rect width="320" height="220" rx="18" fill="#E8F5FA"/>
+  <rect x="103" y="108" width="114" height="66" rx="25" fill="#FFFFFF" stroke="#163B65" stroke-width="6"/>
+  <path d="M124 61c-19 0-31 14-31 33 0 13 7 23 18 28v30h18v-54c0-8 5-13 13-13 7 0 12 5 12 13v54h18v-30c11-5 18-15 18-28 0-19-12-33-31-33-12 0-22 6-27 16-5-10-15-16-28-16z" fill="#2FAED0"/>
+  <circle cx="160" cy="141" r="5" fill="#087FAF"/>
+</svg>

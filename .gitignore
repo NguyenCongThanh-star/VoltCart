@@ -5,11 +5,6 @@ CODE/public/build/
 CODE/public/hot
 CODE/public/storage
 CODE/storage/*.key
-CODE/storage/logs/*
-CODE/storage/framework/cache/*
-CODE/storage/framework/sessions/*
-CODE/storage/framework/views/*
-CODE/bootstrap/cache/*.php
 CODE/.phpunit.result.cache
 
 # Environment secrets (never commit)

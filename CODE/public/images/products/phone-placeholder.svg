@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 220" role="img" aria-label="Minh họa điện thoại">
+  <rect width="320" height="220" rx="18" fill="#E8F5FA"/>
+  <rect x="119" y="18" width="82" height="184" rx="16" fill="#163B65"/>
+  <rect x="126" y="29" width="68" height="160" rx="10" fill="#FFFFFF"/>
+  <rect x="145" y="35" width="30" height="4" rx="2" fill="#A9C8D8"/>
+  <circle cx="160" cy="176" r="5" fill="#087FAF"/>
+  <rect x="137" y="60" width="46" height="78" rx="6" fill="#D9EFF7"/>
+  <path d="M142 126l12-20 10 10 8-13 7 23z" fill="#2FAED0"/>
+</svg>
